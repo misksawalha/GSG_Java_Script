@@ -1,6 +1,4 @@
 
-# Project Title
-
 ## Introduction:
 ### What is JavaScript ?
 javascript is a programming language used to modify the web pages 

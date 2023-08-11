@@ -19,9 +19,11 @@ JavaScript has a number of built-in array methods that can be used to manipulate
 Ability to change the value of a variable after it has been created
 
 ## Mutable Vs Immutable:
-- Immutable : meaning that their values cannot be changed after they have been created such as Primitive data types
-- Mutable : non Primitive data types are mutable. This means that the values of reference data types can be changed after they have been created.
+- Immutable: meaning that their values cannot be changed after they have been created such as Primitive data types
+- Mutable: non Primitive data types are mutable. This means that the values of reference data types can be changed after they have been created.
 
+## Objects :
+is a collection of related data and functionality. These usually consist of several variables and functions (properties and methods when they are inside objects).
 ## Tasks:
 
 ### Q1:

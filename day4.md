@@ -22,7 +22,7 @@ scope refers to the area where a variable or function is visible and accessible 
 
 - **Function scope** : When a function is declared, it creates a new scope. Variables and functions declared inside a function are only accessible from within the function
 
-## var Vs let:
+## var vs let:
 1. var keyword was introduced in ES5 and has the following properties:
 
 - It is hoisted, This means that you can access a var variable before it is declared.

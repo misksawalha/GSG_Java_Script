@@ -17,3 +17,4 @@ Throughout each day of the challenge, a new daily README will be generated. This
 - [Day 3](https://github.com/misksawalha/GSG_Java_Script/blob/main/day3.md)
 - [Day 4](https://github.com/misksawalha/GSG_Java_Script/blob/main/day4.md)
 - [Day 5](https://github.com/misksawalha/GSG_Java_Script/blob/main/day5.md)
+- [Day 6](https://github.com/misksawalha/GSG_Java_Script/blob/main/day6.md)

@@ -26,42 +26,124 @@ Also known as the "pyramid of doom," refers to a situation in JavaScript where m
 ## Tasks:
 
 ### Q1:
-Write a closure named createCounter that takes an initial value start and returns a function. 
-The returned function, when invoked, should increment the counter by 1 and return the updated value.
+You are given a function executeInSequenceWithCBs and some code. The task is to modify the executeInSequenceWithCBs function so that it runs and executes all the tasks inside the asyncTasks array.
+The function should return an array of messages obtained from each task's execution.
+You are only allowed to change the executeInSequenceWithCBs function or add new functions/code. You cannot modify the tasks' functions.
 
 ```
-function createCounter(start){
-     let counter = start;
-      let increment = () =>{
-       return counter++
+const task1 = (cb) => setTimeout(() => {
+    const message = "Task 1 has executed successfully!";
+    cb(message);
+  }, 3000);
+  
+  const task2 = (cb) => setTimeout(() => {
+    const message = "Task 2 has executed successfully!";
+    cb(message);
+  }, 0);
+  
+  const task3 = (cb) => setTimeout(() => {
+    const message = "Task 3 has executed successfully!";
+    cb(message);
+  }, 1000);
+  
+  const task4 = (cb) => setTimeout(() => {
+    const message = "Task 4 has executed successfully!";
+    cb(message);
+  }, 2000);
+  
+  const task5 = (cb) => setTimeout(() => {
+    const message = "Task 5 has executed successfully!";
+    cb(message);
+  }, 4000);
+  
+  const asyncTasks = [task1, task2, task3, task4, task5];
+  
+  const executeInSequenceWithCBs = (tasks, callback) => {
+    const results = [];
+    
+    const executeTask = (index) => {
+      if (index < tasks.length) {
+        const currentTask = tasks[index];
+        currentTask((message) => {
+          results.push(message);
+          executeTask(index + 1);
+        });
+      } else {
+        callback(results);
       }
-      return increment
-}
+    };
+    
+    executeTask(0);
+  };
+  
+  executeInSequenceWithCBs(asyncTasks, (messages) => {
+    console.log(messages); 
+  });
 ```
 
 ### Q2:
-Write a closure named calculateAverage that takes an array of numbers, nums, and returns a function. 
-The returned function, 
-when invoked, should calculate and return the average of the numbers in the array.
+You are given a function called executeInParallelWithPromises, which takes an array of APIs (represented by objects).
+Your task is to write code that fetches the data of each API in parallel using promises. In Parallel means that the api which resolves first, returns its value first, regardless of the execution order.
+The output of the executeInParallelWithPromises function should be an array containing the results of each API's execution.
+Each result should be an object with three keys: apiName, apiUrl, and apiData..
 ```
-function calculateAverage(nums) {
-    let sum = 0;
-    let length = nums.length;
-
-    if (length === 0) {
-        return 0;
-    } else {
-        nums.forEach((item) => {
-            sum += item;
-        });
+const apis = [
+    {
+      apiName: "products", 
+      apiUrl: "https://dummyjson.com/products",
+    }, 
+    {
+      apiName: "users", 
+      apiUrl: "https://dummyjson.com/users",
+    }, 
+    {
+      apiName: "posts", 
+      apiUrl: "https://dummyjson.com/posts",
+    }, 
+    {
+      apiName: "comments", 
+      apiUrl: "https://dummyjson.com/comments",
     }
-
-    let avg = () => {
-        return sum / length;
-    };
-
-    return avg;
-}
+  ]
+  
+  const fetchApiData = async (api) => {
+    try {
+      const response = await fetch(api.apiUrl);
+      const data = await response.json();
+      console.log("data "+data)
+      return {
+        apiName: api.apiName,
+        apiUrl: api.apiUrl,
+        apiData: data,
+      };
+    } catch (error) {
+      return {
+        apiName: api.apiName,
+        apiUrl: api.apiUrl,
+        error: error.message,
+      };
+    }
+  };
+  
+  const executeInParallelWithPromises = async (apis) => {
+    const promises =await apis.map(api => fetchApiData(api));
+    
+    try {
+      const results = await Promise.all(promises);
+      return results;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  };
+  
+  executeInParallelWithPromises(apis)
+    .then(results => {
+      console.log(results);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
 
 ```
 
@@ -71,31 +153,74 @@ The returned function, when invoked with an exponent exp, should calculate and r
 
 
 ```
-function powerOf(base) {
-    let pow = (exp)=>{
-        return Math.pow(base, exp);
-    }
-    return pow
-}
-```
-### Q4:
-Write a closure named compose that takes multiple functions as arguments and returns a new function. 
-The returned function should apply the provided functions in reverse order, passing the result of each function as an argument to the next function.
-```
-function compose(fun1,fun2){
-      let out = (input) =>{
-        return fun1(fun2(input))
-      }
-      return out;
-}
+const apis = [
+  {
+    apiName: "products", 
+    apiUrl: "https://dummyjson.com/products",
+  }, 
+  {
+    apiName: "users", 
+    apiUrl: "https://dummyjson.com/users",
+  }, 
+  {
+    apiName: "posts", 
+    apiUrl: "https://dummyjson.com/posts",
+  }, 
+  {
+    apiName: "comments", 
+    apiUrl: "https://dummyjson.com/comments",
+  }
+]
 
-function double(x) {
-    return x * 2;
-}
+//modify and write your code here
+const executeInSequenceWithPromises = (apis) => {}
 
-function square(x) {
-    return x * x;
-}
+sol:
+const fetchApiData = async (api) => {
+  const response = await fetch(api.apiUrl);
+  const data = await response.json();
+  return {
+    apiName: api.apiName,
+    apiUrl: api.apiUrl,
+    apiData: data,
+  };
+};
+
+const executeInSequenceWithPromises = async (apis) => {
+  const results = [];
+  for (const api of apis) {
+    const result = await fetchApiData(api);
+    results.push(result);
+  }
+  return results;
+};
+
+const apis = [
+  {
+    apiName: "products",
+    apiUrl: "https://dummyjson.com/products",
+  },
+  {
+    apiName: "users",
+    apiUrl: "https://dummyjson.com/users",
+  },
+  {
+    apiName: "posts",
+    apiUrl: "https://dummyjson.com/posts",
+  },
+  {
+    apiName: "comments",
+    apiUrl: "https://dummyjson.com/comments",
+  },
+];
+
+executeInSequenceWithPromises(apis)
+  .then((results) => {
+    console.log(results);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+
 ```
-
 
